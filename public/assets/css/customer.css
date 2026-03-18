@@ -1,0 +1,177 @@
+/* --- Global Settings --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #2e5a3d;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Header (Fixed) --- */
+.header-area {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 180px; /* Adjust as needed */
+    z-index: 1000;
+    background: #fff; /* Optional: set a background for the header */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Logo section within header */
+.logo-sec {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo-sec .logo img {
+    height: 180px; /* This can be adjusted; you might want a smaller value */
+    max-height: 120px; /* Responsive max height */
+    width: auto;
+    display: block;
+    margin: 0 auto 15px;
+}
+
+/* --- Main Page Container --- */
+.page-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main content area below the fixed header */
+.wrapper-content {
+    flex: 1;
+    padding: 20px;
+    max-width: 1600px;
+    width: 100%;
+    margin: 0 auto;
+    /* Push content below header */
+    margin-top: 180px; /* Should match the header height */
+}
+
+/* --- Content Pair (Cart and Products) --- */
+.content-pair {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+/* --- Cart Section --- */
+.cart-section {
+    background: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    min-width: 350px;
+    max-width: 400px;
+}
+
+.cart-section h5 {
+    margin-bottom: 15px;
+}
+
+/* --- Products Section --- */
+.products-section {
+    flex: 1;
+    max-width: 1000px;
+}
+
+/* Category Navigation */
+.category-nav {
+    margin-bottom: 20px;
+}
+.category-btn {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.category-btn.active {
+    background-color: #27ae60;
+    border-color: #27ae60;
+    color: #fff;
+}
+
+/* --- Product Item and Card --- */
+.product-item {
+    flex: 1 1 200px; /* Minimum width 200px */
+    max-width: 33%; /* Approximately 3 items per row (adjust as needed) */
+}
+
+.product_list {
+    background: #fcfcfc;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: box-shadow 0.3s ease;
+    min-height: 320px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.product_list:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.product_list img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+.product_list img:hover {
+    transform: scale(1.05);
+}
+
+/* Ensure the entire product card is clickable */
+.AddToCart {
+    cursor: pointer;
+}
+
+/* --- Footer --- */
+.footer {
+    background-color: #f1f1f1;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: auto;  /* Push footer to bottom if content is short */
+}
+
+/* --- Utility Elements --- */
+.quantity-input {
+    width: 60px;
+    text-align: center;
+}
+
+h4, .TotalAmount {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Modal tweaks (if needed) */
+.modal-content {
+    padding: 20px;
+}
+.modal-body h4 {
+    font-size: 20px;
+    font-weight: 600;
+}

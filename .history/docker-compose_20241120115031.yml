@@ -1,0 +1,47 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel-app
+    ports:
+      - "9000:9000"
+    volumes:
+      - .:/var/www
+    networks:
+      - laravel-network
+    depends_on:
+      - db
+      # If you have Redis service, add it like this:
+      # - redis
+
+  db:
+    image: mysql:5.7
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test   # Ensure this matches DB_DATABASE in .env
+      MYSQL_USER: user       # Ensure this matches DB_USERNAME in .env
+      MYSQL_PASSWORD: ""     # Leave it empty if you don't have a password for MySQL
+    ports:
+      - "3306:3306"
+    networks:
+      - laravel-network
+    volumes:
+      - db-data:/var/lib/mysql
+
+  redis:
+    image: redis:alpine
+    container_name: redis-container
+    ports:
+      - "6379:6379"
+    networks:
+      - laravel-network
+
+networks:
+  laravel-network:
+    driver: bridge
+
+volumes:
+  db-data:
+    driver: local

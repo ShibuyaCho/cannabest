@@ -1,0 +1,31 @@
+FROM php:8.2-fpm
+
+# Install system dependencies and PHP extensions in one command to reduce layers
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    zlib1g-dev \
+    libzip-dev \
+    git && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-install gd pdo pdo_mysql
+
+
+# Set the working directory inside the container
+WORKDIR /var/www
+
+# Copy the Laravel project into the container
+COPY . .
+
+# Install Composer globally
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Install dependencies using Composer
+RUN composer install --no-interaction
+
+# Expose port 9000 for the PHP-FPM server
+EXPOSE 9000
+
+# Command to run PHP-FPM when the container starts
+CMD ["php-fpm"]

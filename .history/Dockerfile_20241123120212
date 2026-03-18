@@ -1,0 +1,31 @@
+# Step 1: Use PHP 8.2 FPM as the base image
+FROM php:8.2-fpm
+
+# Step 2: Set working directory inside the container
+WORKDIR /var/www
+
+# Step 3: Install necessary system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    zlib1g-dev \
+    libzip-dev \
+    git \
+    unzip \
+    && docker-php-ext-install gd pdo pdo_mysql zip
+
+# Step 4: Install Composer (PHP dependency manager)
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Step 5: Copy Laravel project files into the container
+COPY . .
+
+# Step 6: Install PHP dependencies using Composer
+RUN composer install --no-dev --optimize-autoloader
+
+# Step 7: Expose port for PHP-FPM
+EXPOSE 9000
+
+# Step 8: Set the entrypoint to PHP-FPM
+CMD ["php-fpm"]
